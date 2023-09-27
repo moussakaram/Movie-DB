@@ -40,10 +40,38 @@ app.get(' /movies/create',(req, res)=>{
   const id=req.params.id;
   res.status(200).send({status: res.statusCode, message:id})
   });
-
+  //to read all the movie available in the array movies 
   app.get('/movies/read', (req, res) => {
     res.status(200).send({ status: res.statusCode, data: movies });
 });
+// to get movies ordered by date 
+app.get('/movies/read/by-date',(req , res) => {
+  const moviesDate= movies.sort((a, b) => {
+    return b.year - a.year;  
+});
+
+res.status(200).send({ status: res.statusCode, data: moviesDate });
+});
+ 
+// to get movies ordered by rating  
+app.get('/movies/read/by-rating',(req , res) => {
+  const moviesRating= movies.sort((a, b) => {
+    return b.rating - a.rating;  
+});
+
+res.status(200).send({ status: res.statusCode, data: moviesRating });
+});
+
+// to get movies ordered by title 
+app.get('/movies/read/by-title',(req , res) => {
+  const moviesTitle= movies.sort((a, b) => {
+    return b.title - a.title;  
+});
+
+res.status(200).send({ status: res.statusCode, data: moviesTitle });
+});
+
+//here 
   
     app.get('/movies/update',(req, res)=>{
       const id=req.params.id;
