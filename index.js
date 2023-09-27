@@ -36,10 +36,7 @@ app.get('/search', (req, res) => {
   }
 });
 
-app.get(' /movies/create',(req, res)=>{
-  const id=req.params.id;
-  res.status(200).send({status: res.statusCode, message:id})
-  });
+
   //to read all the movie available in the array movies 
   app.get('/movies/read', (req, res) => {
     res.status(200).send({ status: res.statusCode, data: movies });
@@ -71,18 +68,49 @@ app.get('/movies/read/by-title',(req , res) => {
 res.status(200).send({ status: res.statusCode, data: moviesTitle });
 });
 
-//here 
-  
+
+// to read one movie by id 
+app.get('/movies/read/id/:id',(req , res)=>{
+  const id=req.params.id;//to get id from user 
+  console.log(id);
+  if(id<movies.length+1){
+    res.status(200).send(
+      {status: res.statusCode, 
+        data:movies[id]})
+
+  }else{
+    res.status(404).send({status : res.statusCode,
+      error:true, message:
+      `the movie ${id} does not exist`})
+  }
+})
+
+
+
+
+
+
+
+
+
+// here 
+  // to update movies 
     app.get('/movies/update',(req, res)=>{
       const id=req.params.id;
       res.status(200).send({status: res.statusCode, message:id})
       });
 
-
+// to delete movies 
       app.get('/movies/delete',(req, res)=>{
         const id=req.params.id;
         res.status(200).send({status: res.statusCode, message:id})
         });
+
+// to create movies 
+        app.get(' /movies/create',(req, res)=>{
+          const id=req.params.id;
+          res.status(200).send({status: res.statusCode, message:id})
+          });
 
 
 
